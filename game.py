@@ -5,7 +5,7 @@ pygame.init()
 
 WIDTH, HEIGHT = 1600, 900
 WIN = pygame.display.set_mode((WIDTH, HEIGHT))
-pygame.display.set_caption("Gra Dwóch Graczy")
+pygame.display.set_caption("SPACE WARS")
 
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
@@ -25,6 +25,7 @@ PLAYER2_SHIP = pygame.transform.rotate(pygame.transform.scale(PLAYER2_SHIP_IMAGE
 ASTEROID_IMAGE = pygame.image.load("./assets/asteroid.png")
 ASTEROID = pygame.transform.scale(ASTEROID_IMAGE, (ASTEROID_WIDTH, ASTEROID_HEIGHT))
 UPGRADE_IMAGE = pygame.image.load("./assets/upgrade.png")
+BACKGROUND_IMAGE =  pygame.transform.scale(pygame.image.load("./assets/menu_bg.jpg"), (WIDTH, HEIGHT))
 UPGRADE = pygame.transform.scale(UPGRADE_IMAGE, (UPGRADE_WIDTH, UPGRADE_HEIGHT))
 BACKGROUND = pygame.transform.scale(pygame.image.load("./assets/background.jpg"), (WIDTH, HEIGHT))
 
@@ -40,7 +41,7 @@ ASTEROID_VEL = 3
 MAX_HEALTH = 3
 
 FONT = pygame.font.SysFont('sans', 40)
-MENU_FONT = pygame.font.SysFont('sans', 60)
+MENU_FONT = pygame.font.SysFont('sans', 100)
 
 class Ship:
     def __init__(self, x, y, image):
@@ -211,15 +212,15 @@ class Button:
         return False
 
 def draw_menu(start_button, instructions_button, quit_button):
-    WIN.fill(BLACK)
-    draw_text_centered("Gra Dwóch Graczy", MENU_FONT, WHITE, -100)
+    WIN.blit(BACKGROUND_IMAGE, (0, 0))
+    draw_text_centered("SPACE WARS", MENU_FONT, WHITE, -200)
     start_button.draw(WIN)
     instructions_button.draw(WIN)
     quit_button.draw(WIN)
     pygame.display.update()
 
 def draw_instructions(back_button):
-    WIN.fill(BLACK)
+    WIN.blit(BACKGROUND_IMAGE, (0, 0))
     draw_text_centered("Instrukcje", MENU_FONT, WHITE, -200)
     instructions = [
         "Gracz 1:",
@@ -245,7 +246,7 @@ def draw_text_centered(text, font, color, y_offset):
     WIN.blit(text_surface, text_rect)
 
 def draw_win_screen(winner):
-    WIN.fill(BLACK)
+    WIN.blit(BACKGROUND_IMAGE, (0, 0))
     draw_text_centered(f"{winner} Wygrywa!", MENU_FONT, WHITE, -50)
     draw_text_centered("Naciśnij ESC, aby wrócić do menu głównego", FONT, WHITE, 50)
     pygame.display.update()
